@@ -26,10 +26,16 @@ class _QuizState extends State<Quiz>{
     selectedAnswers.add(answer); 
     if(selectedAnswers.length == questions.length){
       setState(() {
-        selectedAnswers = []; 
         activeScreen = 'result-screen';
       });
     }
+  }
+
+    void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'start-screen';
+    });
   }
 
   @override

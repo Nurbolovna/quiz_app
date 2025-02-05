@@ -29,7 +29,6 @@ class ResultsScreen extends StatelessWidget{
     final correctQuestions = summaryData.where((data) {
       return data['user_answer'] == data['correct_answer']; 
     }).length; 
-
     return SizedBox(
       width: double.infinity, 
       child: Container(
@@ -37,7 +36,7 @@ class ResultsScreen extends StatelessWidget{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You answered $correctQuestions out of $totalQuestions questions'), 
+            Text('You answered $correctQuestions out of $totalQuestions questions', style: TextStyle(color: Color.fromARGB(255, 245, 246, 248)),), 
             SizedBox(height: 30, ), 
             QuestionsSummary(summaryData), 
             SizedBox(height: 30,), 
