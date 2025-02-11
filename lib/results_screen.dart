@@ -1,50 +1,66 @@
-
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
-import 'package:quiz_app/questions_summary/questions_summary.dart';
+import 'package:quiz_app/questions_summary.dart';
 
-class ResultsScreen extends StatelessWidget{
-  const ResultsScreen ({super.key, required this.chosenAnswers});
+class ResultsScreen extends StatelessWidget {
+  const ResultsScreen(
+      {super.key, required this.chosenAnswers, required this.onRestart});
+  final List<String> chosenAnswers;
+  final void Function() onRestart;
 
-  final List<String> chosenAnswers; 
+  List<Map<String, Object>> getSummaryData() {
+    final List<Map<String, Object>> summary = [];
 
-
-  List<Map<String, Object>> getSummaryData(){
-    final List<Map<String, Object>> summary = []; 
-    for(var i = 0; i < chosenAnswers.length ; i++){
+    for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add({
-        'question_index': i , 
-        'question': questions[i].text, 
-        'correct_answer': questions[i].answers[0], 
-        'user_answer': chosenAnswers[i]
-      }); 
+        'question_index': i,
+        'question': questions[i].text,
+        'correct_answer': questions[i].answers[0],
+        'user_answer': chosenAnswers[i],
+      });
     }
-    return summary; 
+    return summary;
   }
 
- @override
-  Widget build(BuildContext context){
-    final summaryData = getSummaryData(); 
-    final totalQuestions = questions.length; 
+  @override
+  Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+    final totalQuestions = questions.length;
     final correctQuestions = summaryData.where((data) {
-      return data['user_answer'] == data['correct_answer']; 
-    }).length; 
+      return data['user_answer'] == data['correct_answer'];
+    }).length;
     return SizedBox(
-      width: double.infinity, 
+      width: double.infinity,
       child: Container(
-        margin: const EdgeInsets.all(40), 
+        margin: const EdgeInsets.all(40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You answered $correctQuestions out of $totalQuestions questions', style: TextStyle(color: Color.fromARGB(255, 245, 246, 248)),), 
-            SizedBox(height: 30, ), 
-            QuestionsSummary(summaryData), 
-            SizedBox(height: 30,), 
-            TextButton(onPressed: (){}, child: Text(style: TextStyle(color:const Color.fromARGB(254, 255, 255, 255) ), 'Restart Quiz!'), ), 
+            Text(
+              style: TextStyle(
+                  color: Color.fromARGB(199, 245, 246, 248),
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold),
+              'You answered $correctQuestions out of $totalQuestions questions correctly',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            QuestionsSummary(summaryData),
+            SizedBox(
+              height: 30,
+            ),
+            OutlinedButton(
+              onPressed: onRestart,
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color.fromARGB(254, 255, 255, 255),), 
+                child: Text('Restart Quiz!'),
+              ),
+            //TextButton(onPressed:(){Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => StartScreen(startQuiz)),);} , child: Text(style: TextStyle(color:const Color.fromARGB(254, 255, 255, 255) ), 'Restart Quiz!'), ),
           ],
         ),
       ),
     );
   }
-
 }

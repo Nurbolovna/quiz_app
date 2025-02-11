@@ -7,6 +7,7 @@ class QuestionsSummary extends StatelessWidget {
   final List<Map<String, Object>> summaryData;
   @override
   Widget build(BuildContext context) {
+    final isCorrect = 'user_answer' == 'correct_answer';
     return SizedBox(
       height: 400,
       child: SingleChildScrollView(
@@ -16,7 +17,24 @@ class QuestionsSummary extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(((data['question_index'] as int) + 1).toString(), style: TextStyle(color: Color.fromARGB(255, 245, 246, 248))),
+                Container(
+                  width: 30,
+                  height: 30,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isCorrect
+                        ? Color.fromARGB(255, 40, 233, 30)
+                        : Color.fromARGB(255, 117, 173, 233),
+                  ),
+                  child: Text(
+                    ((data['question_index'] as int) + 1).toString(),
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 245, 246, 248),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,6 +43,8 @@ class QuestionsSummary extends StatelessWidget {
                         data['question'] as String,
                         style: TextStyle(
                           color: Color.fromARGB(255, 245, 246, 248),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(
@@ -33,13 +53,13 @@ class QuestionsSummary extends StatelessWidget {
                       Text(
                         data['user_answer'] as String,
                         style: TextStyle(
-                          color: Color.fromARGB(255, 245, 246, 248),
+                          color: Color.fromARGB(210, 245, 246, 248),
                         ),
                       ),
                       Text(
                         data['correct_answer'] as String,
                         style: TextStyle(
-                          color: Color.fromARGB(255, 245, 246, 248),
+                          color: Color.fromARGB(255, 117, 173, 233),
                         ),
                       ),
                       const SizedBox(height: 10),
