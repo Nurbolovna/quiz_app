@@ -37,6 +37,8 @@ class _QuizState extends State<Quiz>{
       activeScreen = 'questions-screen';
     });
   }
+
+  
   @override
   Widget build(context){
     Widget screenWidget = StartScreen(switchScreen); 
@@ -60,5 +62,5 @@ class _QuizState extends State<Quiz>{
         ),
       ),
     );
-  }
-  }
+  }//build 
+  }//_QuizState

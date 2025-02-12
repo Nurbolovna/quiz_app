@@ -5,14 +5,19 @@ class QuestionsSummary extends StatelessWidget {
       {super.key}); //difference QuestionsSummary( {super.key, this.summaryData})
 
   final List<Map<String, Object>> summaryData;
+
   @override
   Widget build(BuildContext context) {
-    final isCorrect = 'user_answer' == 'correct_answer';
+ 
     return SizedBox(
       height: 400,
       child: SingleChildScrollView(
         child: Column(
           children: summaryData.map((data) {
+            bool isCorrect = false;
+            if(data['user_answer'] == data['correct_answer']){
+                isCorrect = true; 
+            }
             return Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +30,7 @@ class QuestionsSummary extends StatelessWidget {
                     shape: BoxShape.circle,
                     color: isCorrect
                         ? Color.fromARGB(255, 40, 233, 30)
-                        : Color.fromARGB(255, 117, 173, 233),
+                        : Color.fromARGB(255, 223, 35, 10),
                   ),
                   child: Text(
                     ((data['question_index'] as int) + 1).toString(),
