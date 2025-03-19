@@ -1,12 +1,10 @@
-ios/* linguist-vendored
-android/* linguist-vendored
-macos/* linguist-vendored
+# Mark CMake files as vendored so they don't count toward language stats
+*.cmake linguist-vendored
+
+# Mark native desktop folders (if using Flutter for desktop) as vendored
 windows/* linguist-vendored
 linux/* linguist-vendored
+macos/* linguist-vendored
 
-# Mark any .cpp/.h as vendored too
-*.cpp linguist-vendored
-*.h   linguist-vendored
-
-# Explicitly treat .dart as Dart
+# Explicitly mark .dart files as Dart
 *.dart linguist-language=Dart
