@@ -1,0 +1,12 @@
+ios/* linguist-vendored
+android/* linguist-vendored
+macos/* linguist-vendored
+windows/* linguist-vendored
+linux/* linguist-vendored
+
+# Mark any .cpp/.h as vendored too
+*.cpp linguist-vendored
+*.h   linguist-vendored
+
+# Explicitly treat .dart as Dart
+*.dart linguist-language=Dart
